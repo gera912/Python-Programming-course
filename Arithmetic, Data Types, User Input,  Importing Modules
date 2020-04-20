@@ -1,0 +1,77 @@
+##
+# Instructor Example Solution  
+# Course: CIS 117 PythonProgramming
+# Lab #2: Arithmetic, Data Types, User Input, 
+#         Importing Modules
+# Application: Expression set calculations
+# Description: Expression set of mixed data 
+#              type operations.  Import datetime
+#              module to obtain timestamp.
+# Input: User input validated for lastname and student id.
+# Requirements: Family name contains at least two letters.
+#               College Student ID is a positive integer.
+# Output: Expression results as per lab specification. 
+# Development Environment: Ubuntu 17.0
+# Version:  Python 3.7
+# Solution File: CIS117_InstructorSolnLab2.py 
+# Date: 02/05/19
+#
+
+import datetime
+
+MIN_LENGTH = 2 
+MIN = 0
+
+while True:
+    n_let = len(input("Enter your family name: "))
+    if n_let >= MIN_LENGTH:
+         break
+    print("Error - Your name must contain at least two letters.")
+        
+while True:
+    try:
+        my_id = sum(map(int, input("Enter your student ID: ")))
+
+        if my_id > MIN:
+            break
+    except ValueError:
+        print("Error - Your id must contain positive integers only.")
+
+expr = [ my_id /2,
+         my_id % 2,
+         sum(range(2, n_let + 1)),
+         my_id + n_let,
+         abs(n_let - my_id),
+         (my_id) / (n_let + 1100),
+         bool( (n_let % n_let) and (my_id * my_id)),
+         bool(1 or (my_id / 0)),
+         round(3.14, 1) ]
+
+print("my_id is: ", my_id)
+print("n_let is: ", n_let)
+for index, result in enumerate(expr):
+    if type(result) is int:
+        print('expression {0}: {1}'.format( index + 1, result))
+    elif type(result) is bool:
+        print('expression {0}: {1}'.format(index + 1, result))
+    else:
+        print('expression {0}: {1:0.2f}'.format(index + 1, result))
+print("Today's date is", datetime.date.today())
+
+'''
+Enter your family name: Student
+Enter your student ID: 12345678
+my_id is:  36
+n_let is:  7
+expression 1: 18.00
+expression 2: 0
+expression 3: 27
+expression 4: 43
+expression 5: 29
+expression 6: 0.03
+expression 7: False
+expression 8: True
+expression 9: 3.10
+Today's date is 2019-02-05
+'''
+
